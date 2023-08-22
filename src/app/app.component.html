@@ -1,0 +1,11 @@
+<mat-toolbar>
+  <button mat-icon-button class="example-icon" aria-label="No disponible." disabled>
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span (click)="home()" class="title-navigate">Yes, i sell it!</span>
+  <span class="example-spacer"></span>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)="share()">
+    <mat-icon>share</mat-icon>
+  </button>
+</mat-toolbar>
+<router-outlet></router-outlet>

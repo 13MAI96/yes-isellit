@@ -1,0 +1,10 @@
+@use '@angular/material' as mat;
+@import "../../node_modules/@angular/material/prebuilt-themes/purple-green.css";
+
+.example-spacer {
+    flex: 1 1 auto;
+  }
+
+.title-navigate{
+    cursor: pointer;
+}
