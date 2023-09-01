@@ -1,17 +1,17 @@
 export interface BoardgameListItem{
     id: number;
     nombre: string;
-    precio: number;
+    editorial: string;
     estado: 'Vendido' | 'Reservado' | 'En venta';
 }
 
 export interface BoardgameViewItem extends BoardgameListItem{
     media: MediaData[];
     descripcion: string;
-    editorial: string;
+    precio: number;
 }
 
 export interface MediaData{
-    type: string;
+    type: "image" | "video";
     url: string;
 }

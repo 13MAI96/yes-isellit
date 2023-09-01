@@ -1,0 +1,73 @@
+<h1 mat-dialog-title>Si, vendo mis juegos...</h1>
+<div mat-dialog-content>
+    <i *ngIf="notificationMessage != ''">
+        Novedades 
+    </i>
+    <p *ngIf="notificationMessage != ''">
+        {{notificationMessage}}
+    </p>
+    <mat-divider *ngIf="notificationMessage != ''"></mat-divider>
+    <i>
+        Por que? 
+    </i>
+    <p>
+        Tengo unos proyectos en los que quiero invertir y hacerlo implica dejar de lado los juegos por un tiempo.
+    </p>
+    <mat-divider></mat-divider>
+    <i>
+        No me aparece nada, no funciona? 
+    </i>
+    <p>
+        Hasta el 1 de septiembre mantendre la pagina en desarrollo y es posible que en algunos momentos no se visualice la lista.
+        Podes escribirme o probar en unos minutos y seguro la pongo en linea otra vez.
+        Despues del 1 de septiembre la pagina ya estaria publicada en su totalidad para todo el publico.
+        Si tenes el link antes de esa fecha, estas viendo la lista antes que otras personas.
+    </p>
+    <mat-divider></mat-divider>
+    <i>
+        Cuanto tiempo dura el precio? 
+    </i>
+    <p>
+        Lastimosamente el pais esta prendido fuego, asi que hasta que se estabilice todo los precios durarian 2hs desde que me contacten.
+    </p>
+    <mat-divider></mat-divider>
+    <i>
+        Puedo señarte y mantener el precio? 
+    </i>
+    <p>
+        Por supuesto, si señas hasta un 5% del valor del juego en esas 2hs te mantengo el precio por 14 dias, pasado ese tiempo lo vuelvo a dejar a la venta y me tomo una birra con la seña.
+    </p>
+    <mat-divider></mat-divider>
+    <i>
+        Me haces un descuento por ser amigo? 
+    </i>
+    <p>
+        Si me compras 3 o mas juegos te hago un descuento del 10% sobre el precio del juego mas caro.
+    </p>
+    <mat-divider></mat-divider>
+    <i>
+        Como puedo pagar? 
+    </i>
+    <p>
+        Con efectivo o transferencia al precio que diga la página.
+        En caso de debito o credito podemos ver las tasas en sistemas de pago como mercadopago, pero advierto que las tasas suelen andar altas.
+    </p>
+    <mat-divider></mat-divider>
+    <i>
+        No conozco un juego, puedo probarlo? 
+    </i>
+    <p>
+        Si el juego esta sellado ta dificil, al igual que algunos juegos que tienen una sola partida.
+        En el resto de los casos podriamos coordinar para que puedas probarlo.
+    </p>
+    <mat-divider></mat-divider>
+    <i>
+        Tengo una duda y no esta aca la respuesta? 
+    </i>
+    <p>
+        Podes consultarme por mensaje y de paso agrego la pregunta aca por si alguien mas tiene esa duda.
+    </p>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close cdkFocusInitial>Ok</button>
+</div>

@@ -4,7 +4,10 @@
   </button>
   <span (click)="home()" class="title-navigate">Yes, i sell it!</span>
   <span class="example-spacer"></span>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)="share()">
+  <button mat-icon-button class="example-icon" (click)="openInfo()" >
+    <mat-icon matBadge="*" [matBadgeHidden]="hidden">error</mat-icon>
+  </button>
+  <button mat-icon-button class="example-icon" (click)="share()">
     <mat-icon>share</mat-icon>
   </button>
 </mat-toolbar>

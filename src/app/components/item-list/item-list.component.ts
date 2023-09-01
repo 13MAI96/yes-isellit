@@ -4,6 +4,9 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { BoardgameListItem } from 'src/app/models/boardgame';
+import { GtagService } from 'src/app/services/gtag.service';
+import { ItemService } from 'src/app/services/item.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 
 @Component({
@@ -13,25 +16,34 @@ import { BoardgameListItem } from 'src/app/models/boardgame';
 })
 export class ItemListComponent {
   title = 'Yes, i sell it!';
-  displayedColumns: string[] = ['id', 'nombre', 'precio', 'estado', 'actions'];
-  dataSource: MatTableDataSource<BoardgameListItem>;
+  displayedColumns: string[] = ['id', 'nombre', 'editorial', 'estado', 'price', 'actions'];
+  dataSource!: MatTableDataSource<BoardgameListItem>;
+  private lastItemQuantity = 0;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private itemService: ItemService,
+    private gtag: GtagService,
+    private notification: NotificationService
   ) {
-    // Create 100 users
-    const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
-
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users);
+    this.itemService.getItemList().subscribe(result => {
+      this.dataSource = new MatTableDataSource(result);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      this.notify(result.length);
+    })
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+  notify(quantity: number){
+    this.lastItemQuantity = Number(localStorage.getItem('item-quantity') ?? 0);
+    if(quantity > this.lastItemQuantity){
+      const news = quantity-this.lastItemQuantity
+      this.notification.newNotification(`Se han agregado ${news} nuevos items.`);
+      localStorage.setItem('item-quantity', JSON.stringify(quantity));
+    }
   }
 
   applyFilter(event: Event) {
@@ -44,64 +56,8 @@ export class ItemListComponent {
   }
 
   selectRow(row: BoardgameListItem){
-    console.log(row);
+    this.gtag.newTag("view_item", row.nombre)
     this.router.navigate(['item/' + row.id])
   }
 }
 
-
-
-export interface UserData {
-  id: string;
-  name: string;
-  progress: string;
-  fruit: string;
-}
-
-/** Constants used to fill up our data base. */
-const FRUITS: string[] = [
-  'blueberry',
-  'lychee',
-  'kiwi',
-  'mango',
-  'peach',
-  'lime',
-  'pomegranate',
-  'pineapple',
-];
-const NAMES: string[] = [
-  'Maia',
-  'Asher',
-  'Olivia',
-  'Atticus',
-  'Amelia',
-  'Jack',
-  'Charlotte',
-  'Theodore',
-  'Isla',
-  'Oliver',
-  'Isabella',
-  'Jasper',
-  'Cora',
-  'Levi',
-  'Violet',
-  'Arthur',
-  'Mia',
-  'Thomas',
-  'Elizabeth',
-];
-
-function createNewUser(id: number): BoardgameListItem {
-  const name =
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))] +
-    ' ' +
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) +
-    '.';
-
-  return {
-    id: id,
-    nombre: name,
-    precio: Math.round(Math.random() * 100),
-    estado: Math.round(Math.random() * 1) > 0.5 ? 'En venta' : 'Vendido',
-  };
-}

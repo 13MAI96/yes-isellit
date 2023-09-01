@@ -17,12 +17,18 @@ import { ItemViewComponent } from './components/item-view/item-view.component';
 import { ItemListComponent } from './components/item-list/item-list.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { HttpClientModule } from '@angular/common/http';
+import { MatDialogModule } from '@angular/material/dialog'
+import { InfoDialog } from './dialogs/info/info-dialog.component';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatBadgeModule} from '@angular/material/badge';
 
 @NgModule({
   declarations: [
     AppComponent,
     ItemViewComponent,
-    ItemListComponent
+    ItemListComponent,
+    InfoDialog
   ],
   imports: [
     BrowserModule,
@@ -38,7 +44,11 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatPaginatorModule,
     MatCardModule,
     MatTabsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule,
+    HttpClientModule,
+    MatDividerModule,
+    MatBadgeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
