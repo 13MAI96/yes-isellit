@@ -5,6 +5,39 @@ import { BoardgameListItem, BoardgameViewItem } from '../models/boardgame';
 import { Observable } from 'rxjs';
 declare const gtag: Function;
 
+export class ItemViewEvent{
+    currency: "USD" | "EUR" | "ARS";
+    value: number;
+    items: ItemEvent[];
+    constructor(
+        currency: "USD" | "EUR" | "ARS", 
+        value: number, 
+        items: ItemEvent[]
+    ){
+        this.currency = currency;
+        this.value = value;
+        this.items = items
+    }
+}
+
+export class ItemEvent{
+    item_id: string;
+    item_name: string;
+    item_brand: string;
+    price: number;
+    constructor(
+        itemId: string, 
+        itemName: string, 
+        itemBrand: string, 
+        price: number
+    ){
+        this.item_id = itemId;
+        this.item_name = itemName;
+        this.item_brand = itemBrand;
+        this.price = price;
+    }
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -37,5 +70,9 @@ export class GtagService {
             }
         )
     }
+  }
+
+  tagItemView(item: ItemViewEvent){
+    gtag("event", "view_item", item)
   }
 }

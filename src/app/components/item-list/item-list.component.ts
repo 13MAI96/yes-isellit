@@ -4,7 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { BoardgameListItem } from 'src/app/models/boardgame';
-import { GtagService } from 'src/app/services/gtag.service';
+import { GtagService, ItemEvent, ItemViewEvent } from 'src/app/services/gtag.service';
 import { ItemService } from 'src/app/services/item.service';
 import { NotificationService } from 'src/app/services/notification.service';
 
@@ -56,7 +56,10 @@ export class ItemListComponent {
   }
 
   selectRow(row: BoardgameListItem){
-    this.gtag.newTag("view_item", row.nombre)
+    let item = new ItemViewEvent("ARS", row.precio, 
+      [new ItemEvent(`${row.id}`, row.nombre, row.editorial, row.precio)]
+    )
+    this.gtag.tagItemView(item);
     this.router.navigate(['item/' + row.id])
   }
 }

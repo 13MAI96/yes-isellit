@@ -3,6 +3,7 @@ export interface BoardgameListItem{
     nombre: string;
     editorial: string;
     estado: 'Vendido' | 'Reservado' | 'En venta';
+    precio: number;
 }
 
 export interface BoardgameViewItem extends BoardgameListItem{
