@@ -1,3 +1,3 @@
 export const environment = {
-    apiUrl: "localhost:8000"
+    apiUrl: "https://yes-isellit.com.ar:4700"
 };

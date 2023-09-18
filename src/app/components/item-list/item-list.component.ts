@@ -56,7 +56,7 @@ export class ItemListComponent {
   }
 
   selectRow(row: BoardgameListItem){
-    let item = new ItemViewEvent("ARS", row.precio, 
+    let item = new ItemViewEvent("ARS", row.precio, row.nombre, 
       [new ItemEvent(`${row.id}`, row.nombre, row.editorial, row.precio)]
     )
     this.gtag.tagItemView(item);

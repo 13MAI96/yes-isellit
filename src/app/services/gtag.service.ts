@@ -8,14 +8,17 @@ declare const gtag: Function;
 export class ItemViewEvent{
     currency: "USD" | "EUR" | "ARS";
     value: number;
+    item_name: string;
     items: ItemEvent[];
     constructor(
         currency: "USD" | "EUR" | "ARS", 
-        value: number, 
+        value: number,
+        itemName: string, 
         items: ItemEvent[]
     ){
         this.currency = currency;
         this.value = value;
+        this.item_name = itemName
         this.items = items
     }
 }
@@ -73,6 +76,6 @@ export class GtagService {
   }
 
   tagItemView(item: ItemViewEvent){
-    gtag("event", "view_item", item)
+    gtag("event", item.item_name, {...item})
   }
 }
